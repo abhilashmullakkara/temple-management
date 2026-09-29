@@ -73,6 +73,10 @@ const clearExpenseButton =
 
 const expensesTable =
     document.getElementById("expensesTable");
+
+const showExpensesButton =
+    document.getElementById("showExpensesButton");
+
     
 const todayIncome =
     document.getElementById("todayIncome");
@@ -80,22 +84,6 @@ const todayIncome =
 const todayExpense =
     document.getElementById("todayExpense");
     
-const EXPENSES_API_URL = "/api/expenses";
-
-const expenseDescription =
-    document.getElementById("expenseDescription");
-
-const expenseAmount =
-    document.getElementById("expenseAmount");
-
-const saveExpenseButton =
-    document.getElementById("saveExpenseButton");
-
-const clearExpenseButton =
-    document.getElementById("clearExpenseButton");
-
-const expensesTable =
-    document.getElementById("expensesTable");    
 
 /*
  * Load standard pooja particulars and amounts
@@ -455,10 +443,7 @@ clearExpenseButton.addEventListener(
 function showNotification(message) {
 
     let notification =
-        document.getElementById(
-            "notification"
-        );
-
+        document.getElementById("notification");
 
     if (!notification) {
 
@@ -473,19 +458,29 @@ function showNotification(message) {
         );
     }
 
-
     notification.textContent =
         message;
 
-    notification.style.display =
-        "block";
-
+    notification.style.position = "fixed";
+    notification.style.top = "50%";
+    notification.style.left = "50%";
+    notification.style.transform = "translate(-50%, -50%)";
+    notification.style.zIndex = "9999";
+    notification.style.padding = "20px 35px";
+    notification.style.background = "#ffffff";
+    notification.style.border = "2px solid green";
+    notification.style.borderRadius = "10px";
+    notification.style.boxShadow = "0 4px 15px rgba(0,0,0,0.3)";
+    notification.style.fontSize = "18px";
+    notification.style.fontWeight = "bold";
+    notification.style.color = "green";
+    notification.style.textAlign = "center";
+    notification.style.display = "block";
 
     setTimeout(
         function () {
 
-            notification.style.display =
-                "none";
+            notification.style.display = "none";
 
         },
         3000
@@ -530,6 +525,38 @@ async function loadExpenses() {
         );
     }
 }
+
+/*
+ * SHOW / HIDE expense list.
+ */
+showExpensesButton.addEventListener(
+    "click",
+    async function () {
+
+        const expenseSection =
+            document.querySelector(
+                ".expense-table-section"
+            );
+
+        if (expenseSection.style.display === "none") {
+
+            await loadExpenses();
+
+            expenseSection.style.display = "block";
+
+            showExpensesButton.textContent =
+                "HIDE EXPENSES";
+
+        } else {
+
+            expenseSection.style.display = "none";
+
+            showExpensesButton.textContent =
+                "SHOW EXPENSES";
+        }
+    }
+);
+
 
 /*
  * Add one expense to the expense table.
@@ -602,113 +629,6 @@ function addExpenseToTable(expense) {
 }
 
 
-/*
- * SAVE EXPENSE button.
- */
-saveExpenseButton.addEventListener(
-    "click",
-    async function () {
-
-        const description =
-            expenseDescription.value.trim();
-
-        const amount =
-            expenseAmount.value.trim();
-
-
-        if (description === "") {
-
-            alert(
-                "Please enter the expense name or description."
-            );
-
-            expenseDescription.focus();
-
-            return;
-        }
-
-
-        const numericAmount =
-            Number(amount);
-
-
-        if (
-            amount === "" ||
-            !Number.isFinite(numericAmount) ||
-            numericAmount < 0
-        ) {
-
-            alert(
-                "Please enter a valid expense amount."
-            );
-
-            expenseAmount.focus();
-
-            return;
-        }
-
-
-        try {
-
-            const response =
-                await fetch(
-                    EXPENSES_API_URL,
-                    {
-                        method: "POST",
-
-                        headers: {
-                            "Content-Type":
-                                "application/json"
-                        },
-
-                        body:
-                            JSON.stringify({
-                                name_or_description:
-                                    description,
-
-                                amount:
-                                    numericAmount
-                                        .toFixed(2)
-                            })
-                    }
-                );
-
-
-            if (!response.ok) {
-
-                const error =
-                    await response.json()
-                        .catch(() => null);
-
-                throw new Error(
-                    error?.message ||
-                    "Server returned HTTP " +
-                    response.status
-                );
-            }
-
-
-            await response.json();
-
-
-            await loadExpenses();
-
-
-            clearExpenseForm();
-
-
-        } catch (error) {
-
-            console.error(error);
-
-            alert(
-                error.message ||
-                "Could not save the expense."
-            );
-        }
-
-    }
-);
 
 /*
  * CLEAR expense form.
