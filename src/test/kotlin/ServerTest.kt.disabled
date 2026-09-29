@@ -1,0 +1,27 @@
+package com.example
+
+import io.ktor.client.request.get
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.testing.testApplication
+import kotlin.test.Test
+import kotlin.test.assertEquals
+
+class ServerTest {
+
+    @Test
+    fun `test root endpoint`() = testApplication {
+
+        application {
+            routing {
+                get("/") {
+                    call.respondText("Temple Management Server")
+                }
+            }
+        }
+
+        assertEquals(
+            HttpStatusCode.OK,
+            client.get("/").status
+        )
+    }
+}

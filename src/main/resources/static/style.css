@@ -1,0 +1,178 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+}
+
+.container {
+    width: 95%;
+    max-width: 1200px;
+    margin: 30px auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-section {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-row label {
+    width: 160px;
+    font-weight: bold;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+    width: 100%;
+    max-width: 600px;
+    padding: 10px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    font-size: 15px;
+}
+
+.form-row textarea {
+    resize: vertical;
+}
+
+.buttons {
+    margin-left: 160px;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 25px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#saveButton {
+    background: #1976d2;
+    color: white;
+}
+
+#clearButton {
+    background: #777;
+    color: white;
+}
+
+.table-section {
+    margin-top: 30px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background: #eeeeee;
+}
+
+tbody tr:hover {
+    background: #f5f5f5;
+}
+.action-button {
+    padding: 6px 12px;
+    margin-right: 5px;
+}
+.search-section {
+    margin-bottom: 15px;
+}
+
+.search-section label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+#searchBox {
+    width: 400px;
+    max-width: 100%;
+    padding: 10px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    font-size: 15px;
+}
+
+/* ================================
+   Today's Summary
+   ================================ */
+
+.today-summary {
+    width: 220px;
+    margin-left: auto;
+    margin-bottom: 20px;
+    padding: 12px 16px;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    background: #f8f8f8;
+}
+
+.today-summary-title {
+    text-align: center;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    margin-bottom: 10px;
+}
+
+.today-summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 6px 0;
+}
+
+.today-summary-row span {
+    font-weight: bold;
+}
+
+.today-summary-row strong {
+    font-size: 16px;
+}
+
+.today-summary-row.income strong {
+    color: green;
+}
+
+.today-summary-row.expense strong {
+    color: red;
+}
+
+
+
