@@ -6,3 +6,5 @@ build/
 local.properties
 .env
 .DS_Store
+ktor-sample.zip
+src/main/resources/static/app.js.broken
